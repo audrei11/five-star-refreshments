@@ -1,23 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@400;700;900&family=DM+Sans:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
-  --yellow: #FEC100;
-  --red: #FF2124;
-  --blue: #2E4EF7;
+  --cyan: #00D4FF;
+  --blue: #0066FF;
+  --dark: #080B0F;
+  --card: #0D1117;
+  --border: rgba(0, 212, 255, 0.15);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  background: #000;
+  background: #080B0F;
   color: #fff;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   overflow-x: hidden;
 }
 
-h1, h2, h3, h4 { font-family: 'Fraunces', serif; }
+h1, h2, h3, h4 { font-family: 'Rajdhani', sans-serif; letter-spacing: 0.02em; }
 
 ::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: #000; }
-::-webkit-scrollbar-thumb { background: #FEC100; border-radius: 2px; }
+::-webkit-scrollbar-track { background: #080B0F; }
+::-webkit-scrollbar-thumb { background: #00D4FF; border-radius: 2px; }
+
+.glow { box-shadow: 0 0 30px rgba(0, 212, 255, 0.2); }
+.glow-text { text-shadow: 0 0 20px rgba(0, 212, 255, 0.5); }

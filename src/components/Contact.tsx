@@ -1,100 +1,69 @@
 "use client";
 import { motion } from "framer-motion";
-import { Phone, Mail, Globe, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, Globe } from "lucide-react";
 
 export default function Contact() {
   return (
-    <section id="contact" className="relative bg-[#111] py-24 px-6 overflow-hidden">
-      <div className="absolute top-1/2 right-0 w-64 h-64 bg-[#2E4EF7] rounded-full translate-x-1/2 -translate-y-1/2 opacity-30 blur-3xl" />
+    <section id="contact" className="relative bg-[#0D1117] py-24 px-6 overflow-hidden">
+      <div className="absolute bottom-0 left-0 w-[500px] h-[300px] bg-[#0066FF] opacity-[0.05] blur-[120px]" />
 
       <div className="relative z-10 max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <span className="text-[#FEC100] text-sm font-medium tracking-widest uppercase mb-4 block">
-            Get In Touch
-          </span>
-          <h2
-            className="text-5xl md:text-6xl font-black text-white mb-4"
-            style={{ fontFamily: "Fraunces, serif" }}
-          >
-            Start Your <span className="text-[#FEC100]">Free Trial</span>
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-14">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="h-px w-8 bg-[#00D4FF]" />
+            <span className="text-[#00D4FF] text-xs font-bold tracking-[0.3em] uppercase">Contact</span>
+          </div>
+          <h2 className="text-5xl font-black text-white uppercase" style={{ fontFamily: "Rajdhani, sans-serif" }}>
+            BUILD WITH <span className="text-[#00D4FF]">US</span>
           </h2>
-          <p className="text-white/50 text-lg max-w-xl mx-auto">
-            Let us bring the quality break experience to your workplace. Contact us today!
-          </p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-12 items-start">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="space-y-6"
-          >
+          <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="space-y-6">
+            <p className="text-white/40 leading-relaxed">
+              Need help choosing components or planning your build? Our PC experts are ready to help you spec the perfect machine.
+            </p>
             {[
-              { icon: Phone, label: "Phone", value: "604.FRE.SHHH (604.373.7444)", color: "#FEC100" },
-              { icon: Mail, label: "Email", value: "dreddy@fivestarrefreshments.com", color: "#FF2124" },
-              { icon: Globe, label: "Website", value: "www.fivestarrefreshments.com", color: "#2E4EF7" },
-              { icon: MapPin, label: "Address", value: "8th Floor, 543 Granville Street, Vancouver, BC V6C 1X8", color: "#FEC100" },
+              { icon: Phone, label: "Phone", value: "+1 (800) NEX-CORE", color: "#00D4FF" },
+              { icon: Mail, label: "Email", value: "builds@nexcore.gg", color: "#0066FF" },
+              { icon: Globe, label: "Website", value: "www.nexcore.gg", color: "#00D4FF" },
+              { icon: MapPin, label: "Location", value: "San Francisco, CA 94105", color: "#0066FF" },
             ].map((item) => (
-              <div key={item.label} className="flex items-start gap-4">
-                <div
-                  className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
-                  style={{ backgroundColor: item.color + "20" }}
-                >
-                  <item.icon size={20} style={{ color: item.color }} />
+              <div key={item.label} className="flex items-center gap-4 group">
+                <div className="w-10 h-10 border flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:bg-[#00D4FF]/10"
+                  style={{ borderColor: item.color + "40" }}>
+                  <item.icon size={16} style={{ color: item.color }} />
                 </div>
                 <div>
-                  <div className="text-white/40 text-xs uppercase tracking-wide mb-1">{item.label}</div>
-                  <div className="text-white font-medium">{item.value}</div>
+                  <p className="text-white/20 text-xs tracking-widest uppercase mb-0.5">{item.label}</p>
+                  <p className="text-white/70 text-sm">{item.value}</p>
                 </div>
               </div>
             ))}
           </motion.div>
 
-          <motion.form
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            onSubmit={(e) => e.preventDefault()}
-            className="space-y-4"
-          >
+          <motion.form initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
+            onSubmit={(e) => e.preventDefault()} className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
-              <input
-                type="text"
-                placeholder="First Name"
-                className="bg-black border border-white/10 rounded-2xl px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-[#FEC100] transition-colors"
-              />
-              <input
-                type="text"
-                placeholder="Last Name"
-                className="bg-black border border-white/10 rounded-2xl px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-[#FEC100] transition-colors"
-              />
+              {["First Name", "Last Name"].map((p) => (
+                <input key={p} type="text" placeholder={p}
+                  className="bg-[#080B0F] border border-white/5 px-4 py-3 text-white placeholder:text-white/20 text-sm focus:outline-none focus:border-[#00D4FF]/50 transition-colors" />
+              ))}
             </div>
-            <input
-              type="email"
-              placeholder="Email Address"
-              className="w-full bg-black border border-white/10 rounded-2xl px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-[#FEC100] transition-colors"
-            />
-            <input
-              type="text"
-              placeholder="Company Name"
-              className="w-full bg-black border border-white/10 rounded-2xl px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-[#FEC100] transition-colors"
-            />
-            <textarea
-              placeholder="Tell us about your needs..."
-              rows={4}
-              className="w-full bg-black border border-white/10 rounded-2xl px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-[#FEC100] transition-colors resize-none"
-            />
-            <button
-              type="submit"
-              className="w-full bg-[#FEC100] text-black font-bold py-4 rounded-full text-base hover:bg-[#FF2124] hover:text-white transition-all duration-300 hover:scale-[1.02]"
-            >
-              Start My Free Trial
+            <input type="email" placeholder="Email Address"
+              className="w-full bg-[#080B0F] border border-white/5 px-4 py-3 text-white placeholder:text-white/20 text-sm focus:outline-none focus:border-[#00D4FF]/50 transition-colors" />
+            <select className="w-full bg-[#080B0F] border border-white/5 px-4 py-3 text-white/40 text-sm focus:outline-none focus:border-[#00D4FF]/50 transition-colors">
+              <option>Budget Range</option>
+              <option>$500 - $1,000</option>
+              <option>$1,000 - $2,500</option>
+              <option>$2,500 - $5,000</option>
+              <option>$5,000+</option>
+            </select>
+            <textarea placeholder="Tell us about your build goals..." rows={4}
+              className="w-full bg-[#080B0F] border border-white/5 px-4 py-3 text-white placeholder:text-white/20 text-sm focus:outline-none focus:border-[#00D4FF]/50 transition-colors resize-none" />
+            <button type="submit"
+              className="w-full bg-[#00D4FF] text-black font-black py-4 text-sm tracking-widest uppercase hover:bg-white transition-all duration-300">
+              Send Message
             </button>
           </motion.form>
         </div>
