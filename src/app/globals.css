@@ -1,28 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
-
-:root {
-  --cyan: #00D4FF;
-  --blue: #0066FF;
-  --dark: #080B0F;
-  --card: #0D1117;
-  --border: rgba(0, 212, 255, 0.15);
-}
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  background: #080B0F;
-  color: #fff;
-  font-family: 'Inter', sans-serif;
+  background: #07090F;
+  color: #ffffff;
+  font-family: 'Inter', system-ui, sans-serif;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4 { font-family: 'Rajdhani', sans-serif; letter-spacing: 0.02em; }
+h1, h2, h3, h4 {
+  font-family: 'Barlow Condensed', sans-serif;
+}
 
 ::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: #080B0F; }
-::-webkit-scrollbar-thumb { background: #00D4FF; border-radius: 2px; }
+::-webkit-scrollbar-track { background: #07090F; }
+::-webkit-scrollbar-thumb { background: #00C8F0; border-radius: 2px; }
 
-.glow { box-shadow: 0 0 30px rgba(0, 212, 255, 0.2); }
-.glow-text { text-shadow: 0 0 20px rgba(0, 212, 255, 0.5); }
+html { scroll-behavior: smooth; }

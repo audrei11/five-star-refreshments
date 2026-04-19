@@ -34,7 +34,7 @@ export const products = [
     name: "Corsair Dominator 64GB DDR5",
     category: "RAM",
     price: 299.99,
-    image: "https://images.unsplash.com/photo-1562976540-1502c2145851?w=600&q=80",
+    image: "https://images.unsplash.com/photo-1561736778-92e52a7769ef?w=600&q=80",
     badge: "RGB",
     badgeColor: "#0066FF",
     desc: "DDR5-6000MHz with stunning RGB. Rock-solid performance for any workload.",

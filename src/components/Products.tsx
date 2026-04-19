@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { ShoppingCart, Star } from "lucide-react";
+import { Plus, Check } from "lucide-react";
 import { products, categories } from "@/data/products";
 import { useCartStore } from "@/store/cartStore";
 
@@ -10,109 +10,57 @@ export default function Products() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [added, setAdded] = useState<number | null>(null);
   const addItem = useCartStore((s) => s.addItem);
-
-  const filtered = activeCategory === "All"
-    ? products
-    : products.filter((p) => p.category === activeCategory);
-
+  const filtered = activeCategory === "All" ? products : products.filter((p) => p.category === activeCategory);
   const handleAdd = (product: typeof products[0]) => {
     addItem({ id: product.id, name: product.name, price: product.price, image: product.image, category: product.category });
     setAdded(product.id);
-    setTimeout(() => setAdded(null), 1500);
+    setTimeout(() => setAdded(null), 1800);
   };
 
   return (
-    <section id="products" className="bg-[#080B0F] py-24 px-6">
-      {/* Grid bg */}
-      <div className="absolute inset-0 opacity-[0.02] pointer-events-none"
-        style={{ backgroundImage: "linear-gradient(#00D4FF 1px, transparent 1px), linear-gradient(90deg, #00D4FF 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
+    <section id="products" style={{ background: "#07090F", padding: "128px 32px" }}>
+      <div style={{ maxWidth: 1280, margin: "0 auto" }}>
 
-      <div className="max-w-7xl mx-auto relative">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-14">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="h-px w-8 bg-[#00D4FF]" />
-            <span className="text-[#00D4FF] text-xs font-bold tracking-[0.3em] uppercase">Our Arsenal</span>
-          </div>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <h2 className="text-5xl md:text-6xl font-black text-white uppercase" style={{ fontFamily: "Rajdhani, sans-serif" }}>
-              PREMIUM <span className="text-[#00D4FF]">HARDWARE</span>
-            </h2>
-            {/* Category filters */}
-            <div className="flex flex-wrap gap-2">
-              {categories.map((cat) => (
-                <button key={cat} onClick={() => setActiveCategory(cat)}
-                  className={`px-4 py-1.5 text-xs font-bold tracking-widest uppercase transition-all duration-200 ${
-                    activeCategory === cat
-                      ? "bg-[#00D4FF] text-black"
-                      : "border border-white/10 text-white/40 hover:border-[#00D4FF]/50 hover:text-[#00D4FF]"
-                  }`}>
-                  {cat}
-                </button>
-              ))}
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 48, flexWrap: "wrap", gap: 24 }}>
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
+              <div style={{ width: 40, height: 1, background: "#00C8F0" }} />
+              <span style={{ color: "#00C8F0", fontSize: 11, fontFamily: "Inter, sans-serif", letterSpacing: "0.3em", textTransform: "uppercase", fontWeight: 600 }}>Our Arsenal</span>
             </div>
+            <h2 style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 52, fontWeight: 900, color: "#fff", textTransform: "uppercase", lineHeight: 1, margin: 0 }}>
+              PREMIUM <span style={{ color: "#00C8F0" }}>HARDWARE</span>
+            </h2>
+          </motion.div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+            {categories.map((cat) => (
+              <button key={cat} onClick={() => setActiveCategory(cat)} style={{ padding: "8px 16px", fontSize: 11, fontFamily: "Inter, sans-serif", fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", cursor: "pointer", border: activeCategory === cat ? "none" : "1px solid rgba(255,255,255,0.15)", background: activeCategory === cat ? "#00C8F0" : "transparent", color: activeCategory === cat ? "#000" : "rgba(255,255,255,0.45)", transition: "all 0.2s" }}>
+                {cat}
+              </button>
+            ))}
           </div>
-        </motion.div>
+        </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 20 }}>
           <AnimatePresence mode="popLayout">
             {filtered.map((product, i) => (
-              <motion.div
-                key={product.id}
-                layout
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.9 }}
+              <motion.div key={product.id} layout
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
                 transition={{ duration: 0.3, delay: i * 0.05 }}
-                whileHover={{ y: -4 }}
-                className="bg-[#0D1117] border border-white/5 hover:border-[#00D4FF]/30 transition-all duration-300 group flex flex-col relative overflow-hidden"
+                style={{ background: "#0F1A2E", border: "1px solid #1E3A5F", display: "flex", flexDirection: "column", overflow: "hidden", position: "relative" }}
+                whileHover={{ borderColor: "rgba(0,200,240,0.4)" }}
               >
-                {/* Hover glow */}
-                <div className="absolute inset-0 bg-[#00D4FF] opacity-0 group-hover:opacity-[0.02] transition-opacity duration-300 pointer-events-none" />
-
-                {/* Corner accents */}
-                <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-[#00D4FF]/0 group-hover:border-[#00D4FF]/60 transition-all duration-300" />
-                <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-[#00D4FF]/0 group-hover:border-[#00D4FF]/60 transition-all duration-300" />
-
-                {/* Image */}
-                <div className="relative h-48 overflow-hidden bg-[#0a0e14]">
-                  <Image src={product.image} alt={product.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0D1117] to-transparent" />
-                  <span className="absolute top-3 left-3 text-xs font-black px-2 py-1 tracking-widest uppercase"
-                    style={{ backgroundColor: product.badgeColor, color: "#000" }}>
-                    {product.badge}
-                  </span>
-                  <span className="absolute top-3 right-3 bg-black/60 text-white/60 text-xs px-2 py-1 border border-white/10">
-                    {product.category}
-                  </span>
+                <div style={{ position: "relative", height: 220, overflow: "hidden", background: "#0D1525", flexShrink: 0 }}>
+                  <Image src={product.image} alt={product.name} fill sizes="(max-width:640px) 100vw, 25vw" style={{ objectFit: "cover", opacity: 0.85 }} />
+                  <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(15,26,46,0.8), transparent)" }} />
+                  <span style={{ position: "absolute", top: 12, left: 12, background: product.badgeColor, color: "#000", fontSize: 9, fontWeight: 900, fontFamily: "Inter, sans-serif", padding: "4px 10px", letterSpacing: "0.15em", textTransform: "uppercase" }}>{product.badge}</span>
                 </div>
-
-                {/* Info */}
-                <div className="p-5 flex flex-col flex-1 gap-3">
-                  <h3 className="text-white font-black text-base leading-tight group-hover:text-[#00D4FF] transition-colors duration-200"
-                    style={{ fontFamily: "Rajdhani, sans-serif" }}>
-                    {product.name}
-                  </h3>
-                  <p className="text-white/30 text-xs leading-relaxed">{product.desc}</p>
-
-                  <div className="flex items-center gap-1 mt-auto">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} size={10} className="text-[#00D4FF] fill-[#00D4FF]" />
-                    ))}
-                    <span className="text-white/20 text-xs ml-1">5.0</span>
-                  </div>
-
-                  <div className="flex items-center justify-between pt-3 border-t border-white/5">
-                    <span className="text-[#00D4FF] font-black text-lg" style={{ fontFamily: "Rajdhani, sans-serif" }}>
-                      ${product.price.toLocaleString()}
-                    </span>
-                    <button onClick={() => handleAdd(product)}
-                      className={`flex items-center gap-1.5 px-3 py-2 text-xs font-black tracking-widest uppercase transition-all duration-300 ${
-                        added === product.id
-                          ? "bg-green-500 text-white"
-                          : "bg-[#00D4FF] text-black hover:bg-white"
-                      }`}>
-                      <ShoppingCart size={12} />
-                      {added === product.id ? "Added!" : "Add"}
+                <div style={{ padding: "20px 20px 20px 20px", display: "flex", flexDirection: "column", flex: 1 }}>
+                  <p style={{ color: "rgba(255,255,255,0.3)", fontSize: 10, letterSpacing: "0.25em", textTransform: "uppercase", fontFamily: "Inter, sans-serif", margin: "0 0 8px 0" }}>{product.category}</p>
+                  <h3 style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 20, fontWeight: 900, color: "#fff", margin: "0 0 auto 0", lineHeight: 1.2 }}>{product.name}</h3>
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 20, paddingTop: 16, borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+                    <span style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 26, fontWeight: 900, color: "#fff" }}>${product.price.toLocaleString()}</span>
+                    <button onClick={() => handleAdd(product)} style={{ width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center", background: added === product.id ? "#22c55e" : "#00C8F0", color: added === product.id ? "#fff" : "#000", border: "none", cursor: "pointer", transition: "all 0.2s" }}>
+                      {added === product.id ? <Check size={14} /> : <Plus size={14} />}
                     </button>
                   </div>
                 </div>
